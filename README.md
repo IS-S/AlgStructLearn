@@ -7,3 +7,5 @@ examples:
 4. "Selection" sort example
 5. "Bubble" sort example
 6. "Insert" sort example
+- **BINSEARCH**
+- example of a binary serch
