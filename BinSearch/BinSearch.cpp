@@ -31,6 +31,7 @@ The input file contains three integers: w, h, n (1≤w,h,n≤10pow9).
 
 #include <iostream>
 using namespace std;
+
 double countSqSize(int w, int h, int n);
 double countSqSizeTwo(int w, int h, int n);
 
@@ -90,6 +91,5 @@ double countSqSizeTwo(int w, int h, int n)
             a0 = a;
         }
     }
-
     return a0;
 }
