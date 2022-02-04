@@ -32,24 +32,34 @@ The input file contains three integers: w, h, n (1≤w,h,n≤10pow9).
 #include <iostream>
 using namespace std;
 
+double countSqSize(int w, int h, int n);
+double countSqSizeTwo(int w, int h, int n);
+
 int main()
 {
-    int w=2, h=3, n=10;
-    int targetSize = 0;
+    double result; // сюда будем получать результат
 
+    result = countSqSize(2, 3, 25);
+
+    cout << "The answer 1 (Binary search) is: " << result; 
+
+    result = countSqSizeTwo(2, 3, 25);
+
+    cout << "The answer 2 (Find of extremum of func) is: " << result;
+}
+double countSqSize(int w, int h, int n)
+{
     // суммарная площадь:
     int actualSquare = w * h * n;
-    
+
     double m;
-    double r= sqrt((w * n) * (h * n));
+    double r = sqrt((w * n) * (h * n));
     double l = 0;
 
-    int counter = 0;
-
-    while ((r - l) > 0.001) 
+    while ((r - l) > 0.001)
     {
         m = (r + l) / 2;
-        if (actualSquare <= pow(m, 2) && (int(m/w)*int(m/h)) >= n)
+        if (actualSquare <= pow(m, 2) && (int(m / w) * int(m / h)) >= n)
         {
             r = m;
         }
@@ -57,9 +67,29 @@ int main()
         {
             l = m;
         }
-        counter++;
     }
+    return r;
+}
+double countSqSizeTwo(int w, int h, int n)
+{
+    // суммарная площадь:
+    int actualSquare = w * h * n;
 
-    cout << "The answer is: " << r;
+    double r = sqrt((w * n) * (h * n));
+    double l = 0;
 
+    int nR = 0;
+    double a0 = n * min(w, h);
+    double a;
+
+    for (int nC = n; nC > 0; nC--)
+    {
+        nR = ceil(double(n) / double(nC));
+        a = max(nR * h, nC * w);
+        if (a < a0)
+        {
+            a0 = a;
+        }
+    }
+    return a0;
 }
